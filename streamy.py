@@ -72,7 +72,7 @@ def hash_password(password):
 
 st_lottie(home_page, height=200, key="home")
 # Title for the application
-st.title("Welcome to SPJ Savings and Loans")
+st.markdown("<h2 style='text-align: center;'>Welcome To SPJ Savings and Loans</h2>", unsafe_allow_html=True)
 
 # Session state to track login
 if 'logged_in' not in st.session_state:
