@@ -94,6 +94,7 @@ if not st.session_state['logged_in']:
             st.success("Login successful! Redirecting to the model page...")
         else:
             st.error("Incorrect password. Please try again.")
+st.markdown("© SPJ Savings and Loans, 2024")
 else:
     # If logged in, display the predictive model page
     st.markdown("<h2 style='text-align: center;'>SPJ Savings and Loans Predictive Model</h2>", unsafe_allow_html=True)
