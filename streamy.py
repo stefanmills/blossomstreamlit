@@ -149,7 +149,7 @@ else:
 
         # 5. Scale the numerical features
         numerical_features_indices = [0, 1, 2, 3, 5]  # Adjust indices based on the input order
-        input_data[:, numerical_features_indices] = scaler.transform(input_data[:, numerical_features_indices])
+        #input_data[:, numerical_features_indices] = scaler.transform(input_data[:, numerical_features_indices])
 
         # 6. Make the prediction using the model
         prediction = model.predict(input_data)
