@@ -193,7 +193,7 @@ else:
         prediction = model.predict(input_data)
 
         # 7. Output the result
-        if prediction[0] == 1:
+        if prediction[0] == 0:
             st.success(f"The model predicts that {client_name} **WILL DEFAULT**.")
             st_lottie(default_animation, height=300, key="default")
             st.write("""
