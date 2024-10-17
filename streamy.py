@@ -194,7 +194,7 @@ else:
 
         # 7. Output the result
         if prediction[0] == 0:
-            st.success(f"The model predicts that {client_name} **WILL DEFAULT**.")
+            st.success(f"The model predicts that {client_name} **WILL LIKELY DEFAULT**.")
             st_lottie(default_animation, height=300, key="default")
             st.write("""
             ### Disclaimer: Predictive Model
@@ -203,7 +203,7 @@ else:
             **We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.**
             """)
         else:
-            st.success(f"The model predicts that {client_name} **WILL NOT DEFAULT**.")
+            st.success(f"The model predicts that {client_name} **WILL LIKELY NOT DEFAULT**.")
             st_lottie(no_default_animation, height=300, key="no_default")
             st.write("""
             ### Disclaimer: Predictive Model
