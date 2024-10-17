@@ -197,7 +197,7 @@ else:
             st.error(f"The model predicts that {client_name} **WILL LIKELY DEFAULT**.")
             st_lottie(default_animation, height=300, key="default")
             st.write("""
-            ### Disclaimer: Predictive Model
+            ### Disclaimer!!!
             This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
 
             **We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.**
@@ -206,7 +206,7 @@ else:
             st.success(f"The model predicts that {client_name} **WILL LIKELY NOT DEFAULT**.")
             st_lottie(no_default_animation, height=300, key="no_default")
             st.write("""
-            ### Disclaimer: Predictive Model
+            ### Disclaimer!!!
             This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
 
             **We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.**
