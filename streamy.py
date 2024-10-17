@@ -20,7 +20,6 @@ def download_file_from_google_drive(file_id):
 
 # Google Drive file IDs
 model_file_id = "1kOA_SQUh9FQydycChQrWIBgMty6xG5EW"  # Model file ID
-#scaler_file_id = "1kNF4X9rEADxhvnnvpG1pheMjwNGZcErq"  # Scaler file ID
 
 # Load the trained model and scaler from Google Drive
 model_content = download_file_from_google_drive(model_file_id)
@@ -48,17 +47,6 @@ if model_content:
         st.stop()  # Stop the execution if the model fails to load
 else:
     st.stop()  # Stop the execution if the model cannot be loaded
-
-#scaler_content = download_file_from_google_drive(scaler_file_id)
-#if scaler_content:
-    #try:
-       # scaler = pickle.load(io.BytesIO(scaler_content))
-        #st.success("Scaler loaded successfully.")
-   # except Exception as e:
-       # st.error(f"Error loading scaler: {e}")
-       # st.stop()  # Stop the execution if scaler fails to load
-#else:
-    #st.stop()  # Stop the execution if the scaler cannot be loaded
 
 # Function to hash the password (though not used in this case)
 def hash_password(password):
@@ -137,19 +125,22 @@ else:
         default = st.selectbox("Default", ("", "Yes", "No"))
     with col9:
         credit_history = st.number_input("Credit History", min_value=0.0, step=1.0, value=0.0)
-st.markdown("""
-### Parameter Definitions
+    
+    # Parameter Definitions
+    st.markdown("""
+    ### Parameter Definitions
 
-- **Age**: Age of the loan applicant.
-- **Income (GH₵)**: Annual income of the loan applicant in cedis.
-- **Home**: Home ownership status of applicant.
-- **Employment Duration (Years)**: Employment length in years.
-- **Intent**: Purpose of the loan.
-- **Loan Applied (GH₵)**: Loan amount applied for in cedis.
-- **Rate**: Interest rate on the loan.
-- **Default**: Whether the applicant has defaulted on a loan previously.
-- **Credit History**: Length of the applicant's credit history.
-""")
+    - **Age**: Age of the loan applicant.
+    - **Income (GH₵)**: Annual income of the loan applicant in cedis.
+    - **Home**: Home ownership status of applicant.
+    - **Employment Duration (Years)**: Employment length in years.
+    - **Intent**: Purpose of the loan.
+    - **Loan Applied (GH₵)**: Loan amount applied for in cedis.
+    - **Rate**: Interest rate on the loan.
+    - **Default**: Whether the applicant has defaulted on a loan previously.
+    - **Credit History**: Length of the applicant's credit history.
+    """)
+    
     # Button for prediction
     if st.button("Predict"):
         # Preprocess the input data (like during model training)
@@ -186,21 +177,20 @@ st.markdown("""
         if prediction[0] == 1:
             st.success(f"The model predicts that {client_name} **WILL DEFAULT**.")
             st.write("""
-### Disclaimer: Predictive Model
-This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
+            ### Disclaimer: Predictive Model
+            This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
 
-We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.
-""")
+            We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.
+            """)
         else:
-            st.success(f"The model predicts that {client_name} **WILL NOT DEFAULT**")
+            st.success(f"The model predicts that {client_name} **WILL NOT DEFAULT**.")
             st.write("""
-### Disclaimer: Predictive Model
-This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
+            ### Disclaimer: Predictive Model
+            This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
 
-We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.
-""")
+            We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.
+            """)
 
     # Back button to log out and return to login page
     if st.button("Back to Login"):
         st.session_state['logged_in'] = False
-        st.success("You have logged out. Please log in again.")
