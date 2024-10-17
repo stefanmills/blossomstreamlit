@@ -214,6 +214,7 @@ else:
             """)
 
     # Back button to log out and return to login page
-    st.markdown("© SPJ Savings and Loans, 2024")
+    
     if st.button("Back to Login"):
         st.session_state['logged_in'] = False
+    st.markdown("© SPJ Savings and Loans, 2024")
