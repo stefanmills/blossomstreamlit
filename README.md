@@ -30,7 +30,7 @@ We have made it a priority to explain each step in the code using clear comments
 
 ### Code & Files
 
-The **Jupyter Notebook** file contains all the code, explanations, and model insights. Feel free to explore it to understand how we tackled the challenge, from data cleaning to building the final predictive model.
+The **Jupyter Notebook (Credit_Risk_Hackaton_ML.ipynb)** file contains all the code, explanations, and model insights. Feel free to explore it to understand how we tackled the challenge, from data cleaning to building the final predictive model.
 
 ### Deployment
 
