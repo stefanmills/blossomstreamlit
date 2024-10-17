@@ -94,7 +94,7 @@ else:
     st.write("Please fill in the details below")
 
     # Client Information
-    st.header("Client Information")
+    st.markdown("<h2 style='text-align: center;'>Client Information</h2>", unsafe_allow_html=True)
 
     # Name of Client
     client_name = st.text_input("Name of Client")
@@ -172,7 +172,7 @@ else:
 
         # 7. Output the result
         if prediction[0] == 1:
-            st.success(f"The model predicts that {client_name} *WILL DEFAULT*.")
+            st.success(f"The model predicts that {client_name} **WILL DEFAULT**.")
             st.write("""
 ### Disclaimer: Predictive Model
 This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
@@ -180,7 +180,7 @@ This application uses a *predictive model* to provide insights based on the data
 We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.
 """)
         else:
-            st.success(f"The model predicts that {client_name} *WILL NOT DEFAULT*")
+            st.success(f"The model predicts that {client_name} **WILL NOT DEFAULT**")
             st.write("""
 ### Disclaimer: Predictive Model
 This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
