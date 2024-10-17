@@ -17,11 +17,12 @@ def load_lottie_url(url: str):
 # Lottie animations URLs
 lottie_default = "https://lottie.host/0e5e5fd2-62d9-406e-9733-e393d8ae38c1/bYbgzbADHS.json"  # Example URL for default animation
 lottie_no_default = "https://lottie.host/748445dc-0823-444f-8cd1-6629ccc7d42d/rEsovbxROq.json"  # Example URL for no default animation
+lottie_home="https://lottie.host/d362ce4f-304b-4633-882f-041d94fb18d3/ZsFfGx4sIg.json"
 
 # Load animations
 default_animation = load_lottie_url(lottie_default)
 no_default_animation = load_lottie_url(lottie_no_default)
-
+home_page=load_lottie_url(lottie_home)
 
 # Function to download file from Google Drive
 def download_file_from_google_drive(file_id):
@@ -69,6 +70,7 @@ else:
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
+st_lottie(home_page, height=300, key="default")
 # Title for the application
 st.title("Welcome to SPJ Savings and Loans")
 
