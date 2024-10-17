@@ -5,6 +5,23 @@ import pickle
 import requests
 import io
 import time
+from streamlit_lottie import st_lottie
+
+# Function to load Lottie animation from a URL
+def load_lottie_url(url: str):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+
+# Lottie animations URLs
+lottie_default = "https://lottie.host/0e5e5fd2-62d9-406e-9733-e393d8ae38c1/bYbgzbADHS.json"  # Example URL for default animation
+lottie_no_default = "https://lottie.host/748445dc-0823-444f-8cd1-6629ccc7d42d/rEsovbxROq.json"  # Example URL for no default animation
+
+# Load animations
+default_animation = load_lottie_url(lottie_default)
+no_default_animation = load_lottie_url(lottie_no_default)
+
 
 # Function to download file from Google Drive
 def download_file_from_google_drive(file_id):
@@ -176,6 +193,7 @@ else:
         # 7. Output the result
         if prediction[0] == 1:
             st.success(f"The model predicts that {client_name} **WILL DEFAULT**.")
+            st_lottie(no_default_animation, height=300, key="no_default")
             st.write("""
             ### Disclaimer: Predictive Model
             This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
@@ -184,6 +202,7 @@ else:
             """)
         else:
             st.success(f"The model predicts that {client_name} **WILL NOT DEFAULT**.")
+            st_lottie(default_animation, height=300, key="default")
             st.write("""
             ### Disclaimer: Predictive Model
             This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
