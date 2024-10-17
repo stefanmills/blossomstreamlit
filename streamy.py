@@ -17,7 +17,7 @@ def load_lottie_url(url: str):
 # Lottie animations URLs
 lottie_default = "https://lottie.host/0e5e5fd2-62d9-406e-9733-e393d8ae38c1/bYbgzbADHS.json"  # Example URL for default animation
 lottie_no_default = "https://lottie.host/748445dc-0823-444f-8cd1-6629ccc7d42d/rEsovbxROq.json"  # Example URL for no default animation
-lottie_home="https://lottie.host/d362ce4f-304b-4633-882f-041d94fb18d3/ZsFfGx4sIg.json"
+lottie_home="https://lottie.host/ead6891f-c6ca-47e3-9711-bd352b01e645/HyXTnlK4NC.json"
 
 # Load animations
 default_animation = load_lottie_url(lottie_default)
