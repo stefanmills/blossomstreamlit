@@ -137,7 +137,19 @@ else:
         default = st.selectbox("Default", ("", "Yes", "No"))
     with col9:
         credit_history = st.number_input("Credit History", min_value=0.0, step=1.0, value=0.0)
+st.markdown("""
+### Parameter Definitions
 
+- **Age**: Age of the loan applicant.
+- **Income (GH₵)**: Annual income of the loan applicant in cedis.
+- **Home**: Home ownership status of applicant.
+- **Employment Duration (Years)**: Employment length in years.
+- **Intent**: Purpose of the loan.
+- **Loan Applied (GH₵)**: Loan amount applied for in cedis.
+- **Rate**: Interest rate on the loan.
+- **Default**: Whether the applicant has defaulted on a loan previously.
+- **Credit History**: Length of the applicant's credit history.
+""")
     # Button for prediction
     if st.button("Predict"):
         # Preprocess the input data (like during model training)
