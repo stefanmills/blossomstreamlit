@@ -70,10 +70,10 @@ else:
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
-
+st_lottie(home_page, height=200, key="default")
 # Title for the application
 st.title("Welcome to SPJ Savings and Loans")
-st_lottie(home_page, height=300, key="default")
+
 # Session state to track login
 if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
