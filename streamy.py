@@ -23,13 +23,28 @@ model_file_id = "1kOA_SQUh9FQydycChQrWIBgMty6xG5EW"  # Model file ID
 
 # Load the trained model and scaler from Google Drive
 model_content = download_file_from_google_drive(model_file_id)
+message_placeholder = st.empty()
+
+# Your existing code to download the model file
 if model_content:
     try:
         model = pickle.load(io.BytesIO(model_content))
-        st.success("Model loaded successfully.")
+        
+        # Show loading spinner
+        with message_placeholder:
+            with st.spinner('Model is loading...'):
+                time.sleep(3)  # Simulate the loading process with a 3-second delay
+        
+        # Show success message for 3 seconds
+        message_placeholder.success("Model loaded successfully.")
+        time.sleep(3)
+        
+        # Clear the message after 3 seconds
+        message_placeholder.empty()
+
     except Exception as e:
         st.error(f"Error loading model: {e}")
-        st.stop()  # Stop the execution if model fails to load
+        st.stop()  # Stop the execution if the model fails to load
 else:
     st.stop()  # Stop the execution if the model cannot be loaded
 
