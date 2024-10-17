@@ -70,7 +70,7 @@ else:
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
-st_lottie(home_page, height=200, key="default")
+st_lottie(home_page, height=200, key="home")
 # Title for the application
 st.title("Welcome to SPJ Savings and Loans")
 
