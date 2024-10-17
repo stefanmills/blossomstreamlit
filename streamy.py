@@ -72,8 +72,8 @@ def hash_password(password):
 
 st_lottie(home_page, height=200, key="home")
 # Title for the application
-st.markdown("<h2 style='text-align: center;'>Welcome To SPJ Savings and Loans</h2>", unsafe_allow_html=True)
-st.markdown("<h5 style='text-align: center;'>*...Build Your Future With Us*</h5>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>SPJ Savings and Loans</h2>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: center;'>...Build Your Future With Us</h5>", unsafe_allow_html=True)
 
 # Session state to track login
 if 'logged_in' not in st.session_state:
