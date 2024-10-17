@@ -4,7 +4,6 @@ import numpy as np
 import pickle
 import requests
 import io
-import time
 
 # Function to download file from Google Drive
 def download_file_from_google_drive(file_id):
@@ -24,7 +23,13 @@ model_file_id = "1kOA_SQUh9FQydycChQrWIBgMty6xG5EW"  # Model file ID
 
 # Load the trained model and scaler from Google Drive
 model_content = download_file_from_google_drive(model_file_id)
-        st.stop()  # Stop the execution if the model fails to load
+if model_content:
+    try:
+        model = pickle.load(io.BytesIO(model_content))
+        st.success("Model loaded successfully.")
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+        st.stop()  # Stop the execution if model fails to load
 else:
     st.stop()  # Stop the execution if the model cannot be loaded
 
@@ -151,18 +156,18 @@ else:
 
         # 7. Output the result
         if prediction[0] == 1:
-            st.success(f"The model predicts that {client_name} **WILL DEFAULT**.")
+            st.success(f"The model predicts that {client_name} *WILL DEFAULT*.")
             st.write("""
 ### Disclaimer: Predictive Model
-This application uses a **predictive model** to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, **no prediction can be 100% accurate**.
+This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
 
 We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.
 """)
         else:
-            st.success(f"The model predicts that {client_name} **WILL NOT DEFAULT**")
+            st.success(f"The model predicts that {client_name} *WILL NOT DEFAULT*")
             st.write("""
 ### Disclaimer: Predictive Model
-This application uses a **predictive model** to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, **no prediction can be 100% accurate**.
+This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
 
 We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.
 """)
