@@ -180,7 +180,7 @@ else:
             ### Disclaimer: Predictive Model
             This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
 
-            We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.
+            **We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.**
             """)
         else:
             st.success(f"The model predicts that {client_name} **WILL NOT DEFAULT**.")
@@ -188,7 +188,7 @@ else:
             ### Disclaimer: Predictive Model
             This application uses a *predictive model* to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, *no prediction can be 100% accurate*.
 
-            We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.
+            **We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.**
             """)
 
     # Back button to log out and return to login page
