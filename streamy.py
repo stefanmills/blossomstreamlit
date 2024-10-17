@@ -2,13 +2,31 @@ import streamlit as st
 import hashlib
 import numpy as np
 import pickle
+import requests
+import io
 
-# Load the trained model and scaler
-with open('model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
+# Function to download file from Google Drive
+def download_file_from_google_drive(file_id):
+    download_url = f"https://drive.google.com/uc?id={file_id}"
+    response = requests.get(download_url)
+    if response.status_code == 200:
+        return response.content
+    else:
+        st.error(f"Failed to download file from Google Drive. Status code: {response.status_code}")
+        return None
 
-with open('scaler.pkl', 'rb') as scaler_file:
-    scaler = pickle.load(scaler_file)
+# Google Drive file IDs
+model_file_id = "1kOA_SQUh9FQydycChQrWIBgMty6xG5EW"  # Model file ID
+scaler_file_id = "1kNF4X9rEADxhvnnvpG1pheMjwNGZcErq"  # Scaler file ID
+
+# Load the trained model and scaler from Google Drive
+model_content = download_file_from_google_drive(model_file_id)
+if model_content:
+    model = pickle.load(io.BytesIO(model_content))
+
+scaler_content = download_file_from_google_drive(scaler_file_id)
+if scaler_content:
+    scaler = pickle.load(io.BytesIO(scaler_content))
 
 # Function to hash the password (though not used in this case)
 def hash_password(password):
@@ -61,8 +79,8 @@ else:
         annual_income = st.number_input("Annual Income (Dollars)", min_value=0.0, step=1000.0, value=0.0)
 
     with col3:
-        # Home ownership dropdown
-        home_ownership = st.selectbox("Home Ownership Status", ("Own", "Mortgage", "Rent"))
+        # Home ownership dropdown options
+        home_ownership = st.selectbox("Home Ownership Status", ("RENT", "OWN", "MORTGAGE", "OTHER"))
 
     # Create another row with 3 columns for Employment Duration, Loan Purpose, and Loan Amount
     col4, col5, col6 = st.columns(3)
@@ -72,8 +90,9 @@ else:
         employment_duration = st.number_input("Employment Duration (Years)", min_value=0, value=0)
 
     with col5:
-        # Purpose of the loan dropdown
-        loan_purpose = st.selectbox("Purpose of the Loan", ("Education", "Home Improvement"))
+        # Purpose of the loan dropdown options
+        loan_purpose = st.selectbox("Purpose of the Loan", ("PERSONAL", "EDUCATION", "VENTURE", 
+                                                            "HOMEIMPROVEMENT", "MEDICAL", "DEBTCONSOLIDATION"))
 
     with col6:
         # Loan applied
@@ -91,11 +110,12 @@ else:
     if st.button("Predict"):
         # Preprocess the input data (like during model training)
         # 1. Map home_ownership to numeric values
-        home_ownership_mapping = {"Own": 1, "Mortgage": 2, "Rent": 3}
+        home_ownership_mapping = {"RENT": 1, "OWN": 2, "MORTGAGE": 3, "OTHER": 4}
         home_ownership_value = home_ownership_mapping[home_ownership]
 
         # 2. Map loan_purpose to numeric values
-        loan_purpose_mapping = {"Education": 1, "Home Improvement": 2}
+        loan_purpose_mapping = {"PERSONAL": 1, "EDUCATION": 2, "VENTURE": 3, 
+                                "HOMEIMPROVEMENT": 4, "MEDICAL": 5, "DEBTCONSOLIDATION": 6}
         loan_purpose_value = loan_purpose_mapping[loan_purpose]
 
         # 3. Map default to numeric
