@@ -7,8 +7,10 @@ import io
 
 # Function to download file from Google Drive
 def download_file_from_google_drive(file_id):
-    download_url = f"https://drive.google.com/uc?id={file_id}"
+    download_url = f"https://drive.google.com/uc?id={file_id}&export=download"
     response = requests.get(download_url)
+    
+    # Check if the response is valid
     if response.status_code == 200:
         return response.content
     else:
@@ -22,11 +24,25 @@ scaler_file_id = "1kNF4X9rEADxhvnnvpG1pheMjwNGZcErq"  # Scaler file ID
 # Load the trained model and scaler from Google Drive
 model_content = download_file_from_google_drive(model_file_id)
 if model_content:
-    model = pickle.load(io.BytesIO(model_content))
+    try:
+        model = pickle.load(io.BytesIO(model_content))
+        st.success("Model loaded successfully.")
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+        st.stop()  # Stop the execution if model fails to load
+else:
+    st.stop()  # Stop the execution if the model cannot be loaded
 
 scaler_content = download_file_from_google_drive(scaler_file_id)
 if scaler_content:
-    scaler = pickle.load(io.BytesIO(scaler_content))
+    try:
+        scaler = pickle.load(io.BytesIO(scaler_content))
+        st.success("Scaler loaded successfully.")
+    except Exception as e:
+        st.error(f"Error loading scaler: {e}")
+        st.stop()  # Stop the execution if scaler fails to load
+else:
+    st.stop()  # Stop the execution if the scaler cannot be loaded
 
 # Function to hash the password (though not used in this case)
 def hash_password(password):
