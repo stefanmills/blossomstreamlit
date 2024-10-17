@@ -156,9 +156,9 @@ else:
 
         # 7. Output the result
         if prediction[0] == 1:
-            st.success(f"The model predicts that {client_name} will default.")
+            st.success(f"The model predicts that {client_name} **WILL DEFAULT**.")
         else:
-            st.success(f"The model predicts that {client_name} will not default.")
+            st.success(f"The model predicts that {client_name} **WILL NOT DEFAULT**")
 
     # Back button to log out and return to login page
     if st.button("Back to Login"):
