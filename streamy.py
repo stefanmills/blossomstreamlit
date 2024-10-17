@@ -96,7 +96,7 @@ else:
 
     with col3:
         # Home ownership dropdown options
-        home_ownership = st.selectbox("Home Ownership Status", ("","RENT", "OWN", "MORTGAGE", "OTHER"))
+        home_ownership = st.selectbox("Home Ownership Status", ("", "RENT", "OWN", "MORTGAGE", "OTHER"))
 
     # Create another row with 3 columns for Employment Duration, Loan Purpose, and Loan Amount
     col4, col5, col6 = st.columns(3)
@@ -107,7 +107,7 @@ else:
 
     with col5:
         # Purpose of the loan dropdown options
-        loan_purpose = st.selectbox("Purpose of the Loan", ("","PERSONAL", "EDUCATION", "VENTURE", 
+        loan_purpose = st.selectbox("Purpose of the Loan", ("", "PERSONAL", "EDUCATION", "VENTURE", 
                                                             "HOMEIMPROVEMENT", "MEDICAL", "DEBTCONSOLIDATION"))
 
     with col6:
@@ -118,31 +118,37 @@ else:
     with col7:
         rate = st.number_input("Rate (%)", min_value=0.0, step=0.1, value=0.0)
     with col8:
-        default = st.selectbox("Default",("","Yes","No"))
+        default = st.selectbox("Default", ("", "Yes", "No"))
     with col9:
         credit_history = st.number_input("Credit History", min_value=0.0, step=1.0, value=0.0)
 
     # Button for prediction
     if st.button("Predict"):
         # Preprocess the input data (like during model training)
-        # 1. Map home_ownership to numeric values
-        home_ownership_mapping = {"RENT": 1, "OWN": 2, "MORTGAGE": 3, "OTHER": 4}
-        home_ownership_value = home_ownership_mapping[home_ownership]
 
-        # 2. Map loan_purpose to numeric values
-        loan_purpose_mapping = {"PERSONAL": 1, "EDUCATION": 2, "VENTURE": 3, 
-                                "HOMEIMPROVEMENT": 4, "MEDICAL": 5, "DEBTCONSOLIDATION": 6}
-        loan_purpose_value = loan_purpose_mapping[loan_purpose]
+        # 1. One-hot encode 'Home' column (4 categories: RENT, OWN, MORTGAGE, OTHER)
+        home_onehot = [0, 0, 0, 0]  # Initialize as 4 zeros
+        home_mapping = {"RENT": 0, "OWN": 1, "MORTGAGE": 2, "OTHER": 3}
+        if home_ownership != "":
+            home_onehot[home_mapping[home_ownership]] = 1
+
+        # 2. One-hot encode 'Intent' column (6 categories)
+        intent_onehot = [0, 0, 0, 0, 0, 0]  # Initialize as 6 zeros
+        intent_mapping = {"PERSONAL": 0, "EDUCATION": 1, "VENTURE": 2, 
+                          "HOMEIMPROVEMENT": 3, "MEDICAL": 4, "DEBTCONSOLIDATION": 5}
+        if loan_purpose != "":
+            intent_onehot[intent_mapping[loan_purpose]] = 1
 
         # 3. Map default to numeric
         default_value = 1 if default == "Yes" else 0
 
         # 4. Construct the input array (needs to be in the same format as training)
-        input_data = np.array([[age, annual_income, employment_duration, loan_applied, rate, 
-                                credit_history, home_ownership_value, loan_purpose_value, default_value]])
+        # Combine numerical features with one-hot encoded categorical features
+        input_data = np.array([[annual_income, loan_applied, rate, credit_history, default_value, employment_duration] 
+                               + home_onehot + intent_onehot])
 
         # 5. Scale the numerical features
-        numerical_features_indices = [1, 3, 4, 5]  # Adjust indices based on the input order
+        numerical_features_indices = [0, 1, 2, 3, 5]  # Adjust indices based on the input order
         input_data[:, numerical_features_indices] = scaler.transform(input_data[:, numerical_features_indices])
 
         # 6. Make the prediction using the model
