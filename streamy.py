@@ -59,7 +59,7 @@ else:
 
     with col3:
         # Home ownership dropdown options
-        home_ownership = st.selectbox("Home Ownership Status", ("RENT", "OWN", "MORTGAGE", "OTHER"))
+        home_ownership = st.selectbox("Home Ownership Status", ("","RENT", "OWN", "MORTGAGE", "OTHER"))
 
     # Create another row with 3 columns for Employment Duration, Loan Purpose, and Loan Amount
     col4, col5, col6 = st.columns(3)
@@ -70,7 +70,7 @@ else:
 
     with col5:
         # Purpose of the loan dropdown options
-        loan_purpose = st.selectbox("Purpose of the Loan", ("PERSONAL", "EDUCATION", "VENTURE", 
+        loan_purpose = st.selectbox("Purpose of the Loan", ("","PERSONAL", "EDUCATION", "VENTURE", 
                                                             "HOMEIMPROVEMENT", "MEDICAL", "DEBTCONSOLIDATION"))
 
     with col6:
