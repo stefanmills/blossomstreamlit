@@ -108,7 +108,7 @@ else:
 
     with col2:
         # Annual income input
-        annual_income = st.number_input("Annual Income (Dollars)", min_value=0.0, step=1000.0, value=0.0)
+        annual_income = st.number_input("Annual Income (GH₵)", min_value=0.0, step=1000.0, value=0.0)
 
     with col3:
         # Home ownership dropdown options
@@ -128,7 +128,7 @@ else:
 
     with col6:
         # Loan applied
-        loan_applied = st.number_input("Loan Applied (Dollars)", min_value=0.0, step=500.0, value=0.0)
+        loan_applied = st.number_input("Loan Applied (GH₵)", min_value=0.0, step=500.0, value=0.0)
     
     col7, col8, col9 = st.columns(3)
     with col7:
