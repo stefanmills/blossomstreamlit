@@ -37,7 +37,7 @@ def download_file_from_google_drive(file_id):
         return None
 
 # Google Drive file IDs
-model_file_id = "1kOA_SQUh9FQydycChQrWIBgMty6xG5EW"  # Model file ID
+model_file_id = "1kaDZVrlYPkRDuAICLuNX2snJKt2lrchb"  # Model file ID
 
 # Load the trained model and scaler from Google Drive
 model_content = download_file_from_google_drive(model_file_id)
