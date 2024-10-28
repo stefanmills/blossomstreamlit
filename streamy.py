@@ -188,4 +188,4 @@ else:
         st.session_state['logged_in'] = False
 
     # Show disclaimer outside of prediction section as well
-    st.write(
+    st.markdown("© SPJ Savings and Loans, 2024")
