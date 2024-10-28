@@ -80,20 +80,6 @@ else:
     st.markdown("<h2 style='text-align: center;'>SPJ Savings and Loans Predictive Model</h2>", unsafe_allow_html=True)
     st.write("Please fill in the details below")
 
-    # Parameter Definitions
-    st.markdown("""
-    ### Parameter Definitions
-
-    - **Age**: Age of the loan applicant.
-    - **Income (GH₵)**: Annual income of the loan applicant in cedis.
-    - **Home**: Home ownership status of applicant.
-    - **Employment Duration (Years)**: Employment length in years.
-    - **Intent**: Purpose of the loan.
-    - **Loan Applied (GH₵)**: Loan amount applied for in cedis.
-    - **Rate**: Interest rate on the loan.
-    - **Default**: Whether the applicant has defaulted on a loan previously.
-    - **Credit History**: Length of the applicant's credit history.
-    """)
 
     # Collect user inputs
     client_name = st.text_input("Name of Client")
@@ -123,6 +109,21 @@ else:
     with col9:
         credit_history = st.number_input("Credit History", min_value=0.0, step=1.0, value=0.0)
     percentage_income = loan_applied / annual_income if annual_income > 0 else 0
+        # Parameter Definitions
+    st.markdown("""
+    ### Parameter Definitions
+
+    - **Age**: Age of the loan applicant.
+    - **Income (GH₵)**: Annual income of the loan applicant in cedis.
+    - **Home**: Home ownership status of applicant.
+    - **Employment Duration (Years)**: Employment length in years.
+    - **Intent**: Purpose of the loan.
+    - **Loan Applied (GH₵)**: Loan amount applied for in cedis.
+    - **Rate**: Interest rate on the loan.
+    - **Default**: Whether the applicant has defaulted on a loan previously.
+    - **Credit History**: Length of the applicant's credit history.
+    """)
+
 
     # One-hot encoding for home ownership
     if home_ownership == "RENT":
