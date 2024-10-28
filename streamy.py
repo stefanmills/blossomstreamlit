@@ -31,7 +31,7 @@ def download_model(file_url):
         st.error(f"Failed to download model. Status code: {response.status_code}")
         return None
 
-# Google Drive or other URL for model and scaler
+# Google Drive URL for model and scaler (replace with the correct URL)
 model_file_url = "https://drive.google.com/uc?id=1KzAn3T7RlCmgjnbBq1RwEW6KZXnZxzBg&export=download"
 
 # Load the trained model and scaler
@@ -130,15 +130,23 @@ else:
     numerical_features_indices = [0, 1, 2, 3, 4, 5]
     input_data[:, numerical_features_indices] = scaler.transform(input_data[:, numerical_features_indices])
 
+    # Debugging output to check input shape
+    st.write("Shape of input data:", input_data.shape)
+    st.write("Model expects features:", model.n_features_in_)
+    st.write("Input data (for debugging):", input_data)
+
     # Prediction
     if st.button("Predict"):
-        prediction = model.predict(input_data)
-        if prediction[0] == 0:
-            st.error(f"The model predicts that {client_name} **WILL LIKELY DEFAULT**.")
-            st_lottie(default_animation, height=300, key="default")
-        else:
-            st.success(f"The model predicts that {client_name} **WILL LIKELY NOT DEFAULT**.")
-            st_lottie(no_default_animation, height=300, key="no_default")
+        try:
+            prediction = model.predict(input_data)
+            if prediction[0] == 0:
+                st.error(f"The model predicts that {client_name} **WILL LIKELY DEFAULT**.")
+                st_lottie(default_animation, height=300, key="default")
+            else:
+                st.success(f"The model predicts that {client_name} **WILL LIKELY NOT DEFAULT**.")
+                st_lottie(no_default_animation, height=300, key="no_default")
+        except ValueError as e:
+            st.error(f"Error making prediction: {e}")
 
     if st.button("Back to Login"):
         st.session_state['logged_in'] = False
