@@ -144,7 +144,7 @@ else:
                            + home_onehot + intent_onehot])
 
     # Apply scaling to numerical features
-    numerical_features_indices = [0, 1, 2, 3, 4, 5, 6]
+    numerical_features_indices = [0, 1, 2, 3, 4, 5]
     input_data[:, numerical_features_indices] = scaler.transform(input_data[:, numerical_features_indices])
 
     # Debugging output to check input shape
