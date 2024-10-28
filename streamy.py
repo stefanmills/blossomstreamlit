@@ -80,6 +80,21 @@ else:
     st.markdown("<h2 style='text-align: center;'>SPJ Savings and Loans Predictive Model</h2>", unsafe_allow_html=True)
     st.write("Please fill in the details below")
 
+    # Parameter Definitions
+    st.markdown("""
+    ### Parameter Definitions
+
+    - **Age**: Age of the loan applicant.
+    - **Income (GH₵)**: Annual income of the loan applicant in cedis.
+    - **Home**: Home ownership status of applicant.
+    - **Employment Duration (Years)**: Employment length in years.
+    - **Intent**: Purpose of the loan.
+    - **Loan Applied (GH₵)**: Loan amount applied for in cedis.
+    - **Rate**: Interest rate on the loan.
+    - **Default**: Whether the applicant has defaulted on a loan previously.
+    - **Credit History**: Length of the applicant's credit history.
+    """)
+
     # Collect user inputs
     client_name = st.text_input("Name of Client")
     col1, col2, col3 = st.columns(3)
@@ -172,5 +187,5 @@ else:
     if st.button("Logout"):
         st.session_state['logged_in'] = False
 
-
-    st.markdown("© SPJ Savings and Loans, 2024")
+    # Show disclaimer outside of prediction section as well
+    st.write(
