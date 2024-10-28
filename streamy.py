@@ -172,12 +172,5 @@ else:
     if st.button("Logout"):
         st.session_state['logged_in'] = False
 
-    # Show disclaimer outside of prediction section as well
-    st.write("""
-        ### Disclaimer!!!
-        This application uses a predictive model to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, no prediction can be 100% accurate.
-
-        *We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.*
-        """)
 
     st.markdown("© SPJ Savings and Loans, 2024")
