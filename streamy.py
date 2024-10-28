@@ -15,7 +15,7 @@ def load_lottie_url(url: str):
 # Lottie animations URLs
 lottie_default = "https://lottie.host/0e5e5fd2-62d9-406e-9733-e393d8ae38c1/bYbgzbADHS.json"
 lottie_no_default = "https://lottie.host/748445dc-0823-444f-8cd1-6629ccc7d42d/rEsovbxROq.json"
-lottie_home="https://lottie.host/ead6891f-c6ca-47e3-9711-bd352b01e645/HyXTnlK4NC.json"
+lottie_home = "https://lottie.host/ead6891f-c6ca-47e3-9711-bd352b01e645/HyXTnlK4NC.json"
 
 # Load animations
 default_animation = load_lottie_url(lottie_default)
@@ -107,27 +107,44 @@ else:
         default = st.selectbox("Default", ("", "Yes", "No"))
     with col9:
         credit_history = st.number_input("Credit History", min_value=0.0, step=1.0, value=0.0)
+    percentage_income = loan_applied / annual_income if annual_income > 0 else 0
 
-    # Define one-hot encoding for categorical inputs
-    home_onehot = [0, 0, 0, 0]
-    home_mapping = {"RENT": 0, "OWN": 1, "MORTGAGE": 2, "OTHER": 3}
-    if home_ownership != "":
-        home_onehot[home_mapping[home_ownership]] = 1
+    # One-hot encoding for home ownership
+    if home_ownership == "RENT":
+        home_onehot = [0, 0, 1]
+    elif home_ownership == "OWN":
+        home_onehot = [0, 1, 0]
+    elif home_ownership == "MORTGAGE":
+        home_onehot = [0, 0, 0]
+    elif home_ownership == "OTHER":
+        home_onehot = [1, 0, 0]
+    else:
+        home_onehot = [0, 0, 0]  # Default if no selection
 
-    intent_onehot = [0, 0, 0, 0, 0, 0]
-    intent_mapping = {"PERSONAL": 0, "EDUCATION": 1, "VENTURE": 2, 
-                      "HOMEIMPROVEMENT": 3, "MEDICAL": 4, "DEBTCONSOLIDATION": 5}
-    if loan_purpose != "":
-        intent_onehot[intent_mapping[loan_purpose]] = 1
+    # One-hot encoding for loan purpose
+    if loan_purpose == "PERSONAL":
+        intent_onehot = [0, 0, 0, 1, 0]
+    elif loan_purpose == "EDUCATION":
+        intent_onehot = [1, 0, 0, 0, 0]
+    elif loan_purpose == "VENTURE":
+        intent_onehot = [0, 0, 0, 0, 1]
+    elif loan_purpose == "HOMEIMPROVEMENT":
+        intent_onehot = [0, 1, 0, 0, 0]
+    elif loan_purpose == "MEDICAL":
+        intent_onehot = [0, 0, 1, 0, 0]
+    elif loan_purpose == "DEBTCONSOLIDATION":
+        intent_onehot = [0, 0, 0, 0, 0]
+    else:
+        intent_onehot = [0, 0, 0, 0, 0]  # Default if no selection
 
     default_value = 1 if default == "Yes" else 0
 
     # Construct input array
-    input_data = np.array([[age, annual_income, employment_duration, loan_applied, rate, credit_history, default_value] 
+    input_data = np.array([[age, annual_income, employment_duration, loan_applied, rate, percentage_income, default_value, credit_history] 
                            + home_onehot + intent_onehot])
 
     # Apply scaling to numerical features
-    numerical_features_indices = [0, 1, 2, 3, 4, 5]
+    numerical_features_indices = [0, 1, 2, 3, 4, 5, 6, 7]
     input_data[:, numerical_features_indices] = scaler.transform(input_data[:, numerical_features_indices])
 
     # Debugging output to check input shape
