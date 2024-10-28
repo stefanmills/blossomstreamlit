@@ -32,7 +32,7 @@ def download_model(file_url):
         return None
 
 # Google Drive or other URL for model and scaler
-model_file_url = "https://drive.google.com/file/d/1KzAn3T7RlCmgjnbBq1RwEW6KZXnZxzBg/view?usp=sharing" 
+model_file_url = "https://drive.google.com/uc?id=1KzAn3T7RlCmgjnbBq1RwEW6KZXnZxzBg&export=download"
 
 # Load the trained model and scaler
 model_content = download_model(model_file_url)
