@@ -147,11 +147,6 @@ else:
     numerical_features_indices = [0, 1, 2, 3, 4, 5]
     input_data[:, numerical_features_indices] = scaler.transform(input_data[:, numerical_features_indices])
 
-    # Debugging output to check input shape
-    st.write("Shape of input data:", input_data.shape)
-    st.write("Model expects features:", model.n_features_in_)
-    st.write("Input data (for debugging):", input_data)
-
     # Prediction
     if st.button("Predict"):
         try:
@@ -162,9 +157,27 @@ else:
             else:
                 st.success(f"The model predicts that {client_name} **WILL LIKELY NOT DEFAULT**.")
                 st_lottie(no_default_animation, height=300, key="no_default")
+            
+            # Display disclaimer after prediction
+            st.write("""
+                ### Disclaimer!!!
+                This application uses a predictive model to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, no prediction can be 100% accurate.
+
+                *We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.*
+                """)
+
         except ValueError as e:
             st.error(f"Error making prediction: {e}")
 
-    if st.button("Back to Login"):
+    if st.button("Logout"):
         st.session_state['logged_in'] = False
+
+    # Show disclaimer outside of prediction section as well
+    st.write("""
+        ### Disclaimer!!!
+        This application uses a predictive model to provide insights based on the data you input. Please note that the predictions are based on historical data and various assumptions. While the model is designed to be as accurate as possible, no prediction can be 100% accurate.
+
+        *We recommend using the predictions as guidance and supplementing them with additional research and analysis when making decisions.*
+        """)
+
     st.markdown("© SPJ Savings and Loans, 2024")
